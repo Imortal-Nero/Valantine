@@ -3,137 +3,137 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Coin Flip Game</title>
     <style>
         body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
             font-family: Arial, sans-serif;
-            background-color: #f4f4f9;
-            color: #333;
-            padding: 20px;
-            text-align: center;
+            background-color: #FFB6C1;
+            background-image: linear-gradient(120deg, #FFA07A 0%, #FFB6C1 100%);
         }
-
-        h1 {
-            color: #4CAF50;
-        }
-
         .container {
-            background-color: #ffffff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            max-width: 500px;
-            margin: auto;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
         }
-
-        input[type="text"], select {
-            width: 100%;
-            padding: 10px;
-            margin: 10px 0;
-            box-sizing: border-box;
-        }
-
         button {
-            background-color: #4CAF50;
-            color: white;
-            padding: 10px;
-            border: none;
+            margin: 0 5px;
+            padding: 10px 20px;
             cursor: pointer;
-            width: 100%;
+            border: none;
             border-radius: 5px;
+            font-size: 1rem;
+            color: #FFFFFF;
         }
-
-        button:hover {
-            background-color: #45a049;
+        #yes-button {
+            background-color: #FF69B4;
+            transition: font-size 0.2s ease-in-out;
         }
-
-        .result {
+        #no-button {
+            background-color: #FF1493;
+        }
+        #custom-text {
+            font-size: 2rem;
+            font-weight: bold;
             margin-top: 20px;
         }
-
-        .coin-video {
-            margin-top: 20px;
+        #image-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        #image {
+            width: 200px;
+            height: auto;
+        }
+        #iloveyou-container {
             display: none;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 20px;
         }
+        #iloveyou-text {
+            font-size: 2rem;
+            font-weight: bold;
+        }
+        #will-you-be-my-valentine {
+        font-size: 1.5rem;
+        font-weight: bold;
+        text-align: center;
+        margin-bottom: 20px;
+    }
     </style>
+    <title>Will you be my Valentine?</title>
 </head>
 <body>
-
-    <h1>Coin Flip Betting Game</h1>
+    <div id="will-you-be-my-valentine">Will you be my Valentine?</div>
+    <div id="image-container" class="tenor-gif-embed" data-postid="13735643" data-share-method="host" data-aspect-ratio="1.1" data-width="20%"><a href="https://tenor.com/view/sweet-zahraa-cute-zahraa-please-smile-beg-gif-13735643">Sweet Zahraa Cute Zahraa Sticker</a>from <a href="https://tenor.com/search/sweet+zahraa-stickers">Sweet Zahraa Stickers</a></div> <script type="text/javascript" async src="https://tenor.com/embed.js"></script>
     <div class="container">
-        <p>Current Balance: <span id="currency">5000</span></p>
-
-        <label for="amount">Enter Amount to Bet:</label>
-        <input type="text" id="amount" placeholder="Enter amount">
-
-        <label for="side">Pick a Side (H/T):</label>
-        <select id="side">
-            <option value="H">Heads (H)</option>
-            <option value="T">Tails (T)</option>
-        </select>
-
-        <button onclick="playGame()">Flip the Coin</button>
-
-        <div class="result" id="result"></div>
-
-        <!-- Coin Flip Video with Audio -->
-        <video id="coinVideo" class="coin-video" width="200" autoplay>
-            <source src="WhatsApp Video 2024-10-11 at 01.23.58_3a6071df.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-        </video>
+        <button id="yes-button" onclick="showILoveYouGif()">Yes</button>
+        <button id="no-button" onclick="changeNoButtonText()">No</button>
     </div>
+    <div id="iloveyou-container">
+        <div class="tenor-gif-embed" data-postid="9838348728876622588" data-share-method="host" data-aspect-ratio="1" data-width="100%"><a href="https://tenor.com/view/kristigocouple2024-gif-9838348728876622588">Kristigocouple2024 GIF</a>from <a href="https://tenor.com/search/kristigocouple2024-gifs">Kristigocouple2024 GIFs</a></div> <script type="text/javascript" async src="https://tenor.com/embed.js"></script>
+    <div id="iloveyou-text">I Love You</div>
+</div>
 
     <script>
-        let currency = 5000;
-
-        function playGame() {
-            let amount = parseInt(document.getElementById('amount').value);
-            let win = document.getElementById('side').value;
-            let resultText = document.getElementById('result');
-            let coinVideo = document.getElementById('coinVideo');
-
-            // Clear result text
-            resultText.innerHTML = "";
-
-            if (isNaN(amount) || amount <= 0) {
-                resultText.innerHTML = "Please enter a valid amount.";
-                return;
-            }
-
-            if (amount > currency) {
-                resultText.innerHTML = "You have entered an amount exceeding your balance. Try Again!";
-                return;
-            }
-
-            // Show coin flip video and start it with audio
-            coinVideo.style.display = 'block';
-            coinVideo.play();
-
-            // Simulate the coin flip with a delay for the video
-            setTimeout(() => {
-                let coin = Math.floor(Math.random() * 2);  // 0 for heads, 1 for tails
-                let side = win === 'H' ? 0 : 1;  // H corresponds to 0, T corresponds to 1
-
-                // Hide the coin flip video after it ends
-                coinVideo.style.display = 'none';
-
-                if (coin === side) {
-                    resultText.innerHTML = `You betted on ${win} and won!`;
-                    currency += amount;
-                } else {
-                    resultText.innerHTML = `You betted on ${win} and lost.`;
-                    currency -= amount;
-                }
-
-                document.getElementById('currency').innerText = currency;
-
-                if (currency <= 0) {
-                    resultText.innerHTML += "<br>You have no money left. Please recharge your account!";
-                }
-
-            }, 2000);  // Set a delay of 2 seconds to simulate the coin flip
+        let noButtonText = document.getElementById('no-button');
+        let currentTextIndex = 0;
+    
+        const noButtonTexts = [
+            'Rethink, please?',
+            'Heart says no. 💔',
+            'Reconsider, love.',
+            'Second thoughts?',
+            'Change of heart?',
+            'You sure?',
+            'Think twice?',
+            'Reevaluate, dear.',
+            'Can\'t bear. 🐻',
+            'One more look?'
+        ];
+    
+        function increaseYesButtonSize() {
+            let yesButton = document.getElementById('yes-button');
+            let currentFontSize = parseFloat(window.getComputedStyle(yesButton, null).getPropertyValue('font-size'));
+            yesButton.style.fontSize = (currentFontSize + 10) + 'px';
         }
-    </script>
+    
+        function changeNoButtonText() {
+            currentTextIndex = (currentTextIndex + 1) % noButtonTexts.length;
+            noButtonText.textContent = noButtonTexts[currentTextIndex];
+            increaseYesButtonSize();
+        }
+    
+        function showILoveYouGif() {
+        let willYouBeMyValentine = document.getElementById('will-you-be-my-valentine');
+        willYouBeMyValentine.style.display = 'none';
 
+        let iloveyouContainer = document.getElementById('iloveyou-container');
+        iloveyouContainer.style.display = 'flex';
+
+        let imageContainer = document.getElementById('image-container');
+        imageContainer.style.display = 'none';
+
+        let container = document.getElementsByClassName('container')[0];
+        container.style.display = 'none';
+
+        let customText = document.getElementById('custom-text');
+        customText.style.display = 'none';
+
+        setTimeout(function() {
+            iloveyouContainer.style.display = 'flex';
+            imageContainer.style.display = 'none';
+            container.style.display = 'none';
+            customText.style.display = 'none';
+            willYouBeMyValentine.style.display = 'none';
+        }, 1000);
+    }
+    </script>
 </body>
 </html>
