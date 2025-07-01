@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-family: Arial, sans-serif;
+            background-color: #FFB6C1;
+            background-image: linear-gradient(120deg, #FFA07A 0%, #FFB6C1 100%);
+        }
+        .container {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+        }
+        button {
+            margin: 0 5px;
+            padding: 10px 20px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            color: #FFFFFF;
+        }
+        #yes-button {
+            background-color: #FF69B4;
+            transition: font-size 0.2s ease-in-out;
+        }
+        #no-button {
+            background-color: #FF1493;
+        }
+        #custom-text {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+        #image-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        #image {
+            width: 200px;
+            height: auto;
+        }
+        #iloveyou-container {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 20px;
+        }
+        #iloveyou-text {
+            font-size: 2rem;
+            font-weight: bold;
+        }
+        #will-you-be-my-valentine {
+        font-size: 1.5rem;
+        font-weight: bold;
+        text-align: center;
+        margin-bottom: 20px;
+        
+    }
+        #gif1{
+            padding-bottom: 20px;
+            border-radius: 25px;
+        }
+    </style>
+    <title>Will you be my Valentine?</title>
+</head>
+<body>
+    <div id="will-you-be-my-valentine">Will you be my Valentine?</div>
+    <div id="gif1"><img style="border-radius: 25px;" src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExeDhidzZ6MDN3bnh5dnE3dTJibDVqM21xc2R2MTNsajdieXpxNDdyNSZlcD12MV9naWZzX3NlYXJjaCZjdD1n/DtBHcARLqNAvVnYsyD/giphy.gif"/> 
+    </div>
+        <div class="container">
+        <button id="yes-button" onclick="showILoveYouGif()">Yes</button>
+        <button id="no-button" onclick="changeNoButtonText()">No</button>
+    </div>
+    <div id="iloveyou-container">
+        <div id="gif1"><img style="border-radius: 25px;" src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOTI4dmphdTdsYXJmdGRtNW5iOWVkdDd2dXk2aTF0OW5pYTRkbWd6eSZlcD12MV9naWZzX3NlYXJjaCZjdD1n/11fIOE3vkIPdIY/giphy.gif"/> 
+    </div>
+    <div id="iloveyou-text">I Love You</div>
+</div>
+
+    <script>
+        let noButtonText = document.getElementById('no-button');
+        let currentTextIndex = 0;
+    
+        const noButtonTexts = [
+            'But we’d look cute together 💞',
+            'Give love a chance 💘',
+            'Not even a maybe? 🥺',
+            'You’re breaking hearts 💔',
+            'That’s cold... 🧊',
+            'Cupid’s crying 😢',
+            'This can’t be real 😭',
+            'Still no? Unbelievable! 😲',
+            'I’m not giving up 💪',
+            'That hurt... a lot 💀',
+            'Wrong button? 😅',
+            'Just one date? 🍰',
+            'Let’s rewrite fate 📝',
+            'You’re joking… right? 😳',
+            'Try again, with love 💗',
+            'Please reconsider 💌',
+            'But I brought flowers 🌹',
+            'Look deep into your heart ❤️',
+            'You’re missing out 🥰',
+            'Can’t we make it work? 🤝'
+
+        ];
+    
+        function increaseYesButtonSize() {
+            let yesButton = document.getElementById('yes-button');
+            let currentFontSize = parseFloat(window.getComputedStyle(yesButton, null).getPropertyValue('font-size'));
+            yesButton.style.fontSize = (currentFontSize + 10) + 'px';
+        }
+    
+        function changeNoButtonText() {
+            currentTextIndex = (currentTextIndex + 1) % noButtonTexts.length;
+            noButtonText.textContent = noButtonTexts[currentTextIndex];
+            increaseYesButtonSize();
+        }
+    
+        function showILoveYouGif() {
+    let willYouBeMyValentine = document.getElementById('will-you-be-my-valentine');
+    willYouBeMyValentine.style.display = 'none';
+
+    let iloveyouContainer = document.getElementById('iloveyou-container');
+    iloveyouContainer.style.display = 'flex';
+
+    let container = document.getElementsByClassName('container')[0];
+    container.style.display = 'none';
+
+    document.getElementById('gif1').style.display = 'none';
+
+}
+
+    </script>
+</body>
+</html>
